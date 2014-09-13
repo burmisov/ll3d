@@ -33,6 +33,19 @@ var layers = [
 	},
 ];
 
+var editableLayers = new L.FeatureGroup();
+
 vectorMap.geoJsonMap(map, layers, function (err) {
-	console.log('>>>', err);
+	map.addLayer(editableLayers);
 });
+
+var drawOptions = {
+	draw: {
+		marker: false
+	},
+	edit: {
+		featureGroup: editableLayers
+	}
+};
+
+var drawControl = new L.Control.Draw(options);
