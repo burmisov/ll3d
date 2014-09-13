@@ -11,6 +11,8 @@ app.use('/data', express.static(path.join(process.cwd(), 'data'), {
 	}
 }));
 
+app.get('/js/bundle.js', browserify(path.join(process.cwd(), 'webapp/webindex.js')));
+
 app.get('/', function (req, res) {
 	res.render('index');
 });
