@@ -1,6 +1,38 @@
 window.L = require('leaflet/dist/leaflet-src.js');
+window.$ = require('jquery/dist/jquery.js');
 
-var map = L.map('map').setView([56.14438, 47.25368], 18);
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+var vectorMap = require('./vectormap');
+
+var map = L.map('map');
+
+var layers = [
+	{
+		geoJsonUrl: '/data/buildings.json',
+		style: function (feature) { return { color: '#FF0000', weight: 3 } },
+		order: 1000
+	},
+	{
+		geoJsonUrl: '/data/landuse.json',
+		style: function (feature) { return { color: '#FF00FF', weight: 3 } },
+		order: 500
+	},
+	{
+		geoJsonUrl: '/data/poipoly.json',
+		style: function (feature) { return { color: '#00FFFF', weight: 3 } },
+		order: 2000
+	},
+	{
+		geoJsonUrl: '/data/roads.json',
+		style: function (feature) { return { color: '#000000', weight: 5 } },
+		order: 3000
+	},
+	{
+		geoJsonUrl: '/data/vegetation.json',
+		style: function (feature) { return { color: '#00FF00', weight: 3 } },
+		order: 3000
+	},
+];
+
+vectorMap.geoJsonMap(map, layers, function (err) {
+	console.log('>>>', err);
+});
