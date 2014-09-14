@@ -4,6 +4,7 @@ window.$ = require('jquery/dist/jquery.js');
 var _ = require('underscore');
 
 var vectorMap = require('./vectormap');
+var scene = require('./scene');
 
 var map = L.map('map', {
 	attributionControl: false
@@ -101,4 +102,5 @@ function findIntersections (ilay) {
 			selectedLayers.addLayer(p);
 		}
 	});
+	scene.createScene(selectedLayers);
 }
