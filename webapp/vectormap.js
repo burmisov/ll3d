@@ -35,7 +35,7 @@ var geoJsonMap = function (map, layers, callback) {
 				sumLng += centLatLng.lng;
 			}
 
-			map.setView([ sumLat / gjLayers.length, sumLng / gjLayers.length ], 16);
+			map.setView([ sumLat / gjLayers.length, sumLng / gjLayers.length ], 17);
 
 			return callback();
 		}

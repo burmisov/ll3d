@@ -74,3 +74,8 @@ L.drawLocal.draw.handlers.simpleshape.tooltip.end =
 
 var drawControl = new L.Control.Draw(drawOptions);
 map.addControl(drawControl);
+
+map.on('draw:created', function (e) {
+	editableLayers.clearLayers();
+	editableLayers.addLayer(e.layer);
+});
