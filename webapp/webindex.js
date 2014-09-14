@@ -104,3 +104,5 @@ function findIntersections (ilay) {
 	});
 	scene.createScene(selectedLayers);
 }
+
+scene.createScene();
