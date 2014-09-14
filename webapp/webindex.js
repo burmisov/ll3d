@@ -5,7 +5,9 @@ var _ = require('underscore');
 
 var vectorMap = require('./vectormap');
 
-var map = L.map('map');
+var map = L.map('map', {
+	attributionControl: false
+});
 
 var layers = [
 	{
