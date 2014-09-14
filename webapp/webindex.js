@@ -1,7 +1,6 @@
 window.L = require('leaflet/dist/leaflet-src.js');
 require('leaflet-draw/dist/leaflet.draw-src.js');
 window.$ = require('jquery/dist/jquery.js');
-var _ = require('underscore');
 
 var vectorMap = require('./vectormap');
 var scene = require('./scene');
