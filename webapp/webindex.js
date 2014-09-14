@@ -9,29 +9,40 @@ var map = L.map('map');
 var layers = [
 	{
 		geoJsonUrl: '/data/buildings.json',
-		style: function (feature) { return { color: '#FF0000', weight: 3, opacity: 1 } },
-		order: 1000
+		style: function (feature) { return { color: '#CC3300', weight: 3, opacity: 1, fillOpacity: 1 } },
+		order: 10000
 	},
 	{
 		geoJsonUrl: '/data/landuse.json',
-		style: function (feature) { return { color: '#FF00FF', weight: 3 } },
-		order: 500
+		style: function (feature) { return { color: '#999999', weight: 3, opacity: 1, fillOpacity: 1 } },
+		order: 3000
 	},
 	{
 		geoJsonUrl: '/data/poipoly.json',
-		style: function (feature) { return { color: '#00FFFF', weight: 3 } },
-		order: 2000
+		style: function (feature) { return { color: '#77AABB', weight: 3, opacity: 1, fillOpacity: 1 } },
+		order: 4000
 	},
 	{
 		geoJsonUrl: '/data/roads.json',
-		style: function (feature) { return { color: '#000000', weight: 5 } },
-		order: 3000
+		style: function (feature) {
+			var style = { opacity: 1, fillOpacity: 1 };
+			switch (feature.properties.HIGHWAY) {
+				case 'service': style.weight = 3; style.color = '#000000'; break;
+				case 'primary': style.weight = 5; style.color = '#000000'; break;
+				case 'secondary': style.weight = 4; style.color = '#000000'; break;
+				case 'residential': style.weight = 2; style.color = '#000000'; break;
+				case 'footway': style.weight = 1; style.color = '#000000'; style.opacity = 0.5; break;
+				default: style.weight = 1; style.color = '#000000'; break;
+			}
+			return style;
+		},
+		order: 2000
 	},
 	{
 		geoJsonUrl: '/data/vegetation.json',
-		style: function (feature) { return { color: '#00FF00', weight: 3 } },
-		order: 3000
-	},
+		style: function (feature) { return { color: '#55FF33', weight: 3, opacity: 1, fillOpacity: 1 } },
+		order: 5000
+	}
 ];
 
 var editableLayers = new L.FeatureGroup();
