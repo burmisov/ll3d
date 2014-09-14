@@ -1,6 +1,7 @@
 window.L = require('leaflet/dist/leaflet-src.js');
 require('leaflet-draw/dist/leaflet.draw-src.js');
 window.$ = require('jquery/dist/jquery.js');
+var _ = require('underscore');
 
 var vectorMap = require('./vectormap');
 
@@ -46,9 +47,11 @@ var layers = [
 ];
 
 var editableLayers = new L.FeatureGroup();
+var selectedLayers = new L.FeatureGroup();
 
 vectorMap.geoJsonMap(map, layers, function (err) {
 	map.addLayer(editableLayers);
+	map.addLayer(selectedLayers);
 });
 
 var drawOptions = {
@@ -78,4 +81,22 @@ map.addControl(drawControl);
 map.on('draw:created', function (e) {
 	editableLayers.clearLayers();
 	editableLayers.addLayer(e.layer);
+
+	findIntersections(e.layer);
 });
+
+function findIntersections (ilay) {
+	selectedLayers.clearLayers();
+	var bounds = ilay.getBounds();
+	layers[0].gjLayer.eachLayer(function (layer) {
+		var otherBounds = layer.getBounds();
+		if (bounds.intersects(otherBounds)) {
+			var p = new L.Polygon(layer.getLatLngs());
+			p.setStyle({
+				// fill: false,
+				color: '#FFFF00'
+			});
+			selectedLayers.addLayer(p);
+		}
+	});
+}

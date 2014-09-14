@@ -2,7 +2,6 @@ var async = require('async');
 var L = require('leaflet');
 
 var geoJsonMap = function (map, layers, callback) {
-	window.gjl = [];
 	async.map(
 		layers,
 		function (item, done) {
@@ -13,7 +12,7 @@ var geoJsonMap = function (map, layers, callback) {
 					var gjLayer = L.geoJson(data, {
 						style: item.style
 					});
-					window.gjl.push(gjLayer);
+					item.gjLayer = gjLayer;
 					return done(null, { gjLayer: gjLayer, order: item.order });
 				}
 			});
