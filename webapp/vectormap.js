@@ -18,7 +18,6 @@ var geoJsonMap = function (map, layers, callback) {
 			});
 		},
 		function (err, gjLayers) {
-			console.log('all', gjLayers);
 			var i;
 			if (err) { if (callback) { return callback(err); } else { throw err; } }
 			var sortedLayers = gjLayers.sort(function (l1, l2) { return l1.order < l2.order; });
