@@ -94,6 +94,7 @@ function findIntersections (ilay) {
 		var otherBounds = layer.getBounds();
 		if (bounds.intersects(otherBounds)) {
 			var p = new L.Polygon(layer.getLatLngs());
+			p.feature = layer.feature;
 			p.setStyle({
 				// fill: false,
 				color: '#FFFF00'
@@ -103,5 +104,3 @@ function findIntersections (ilay) {
 	});
 	scene.createScene(selectedLayers);
 }
-
-scene.createScene();

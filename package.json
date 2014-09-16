@@ -17,6 +17,7 @@
     "jquery": "^1.11.1",
     "leaflet": "^0.7.3",
     "leaflet-draw": "^0.2.3",
-    "three": "^0.68.0"
+    "three": "^0.68.0",
+    "sphericalmercator": "1.0.2"
   }
 }
