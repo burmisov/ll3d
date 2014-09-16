@@ -90,11 +90,23 @@ module.exports.createScene = function (layers) {
 		camera.position.z = 5;
 	}
 
+	var rCounter = 300;
+	var initRotation = camera.rotation.z;
+	var r2 = initRotation + Math.PI / 16;
+	var rInc = Math.PI / 2000;
+
 	function render() {
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 		// cube.rotation.x += 0.01;
 		// cube.rotation.y += 0.01;
+		if ((camera.rotation.z > r2) || (camera.rotation.z < initRotation)) {
+			rInc = -rInc;
+		}
+		rCounter--;
+		if (rCounter <= 0) {
+			camera.rotation.z += rInc;	
+		}
 	}
 
 	if (layers) {
